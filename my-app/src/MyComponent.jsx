@@ -22,20 +22,27 @@ export const MyComponent = () => {
 	const [out, setOut] = useState('0');
 	const [firstNumber, setFirstNumber] = useState(null);
 	const [operator, setOperator] = useState('');
+	const [takeGreenText, setTakeGreenText] = useState(false)
 
 	const handleOperation = (value) => {
 		if (value === 'C') {
+			setTakeGreenText(false)
 			setOut('0');
 			setFirstNumber(null);
 			setOperator('');
 		} else if (value === '+' || value === '-') {
+			setTakeGreenText(false)
 			setFirstNumber(parseFloat(out));
 			setOperator(value);
 			setOut('');
 		} else if (value === '=' || value === 'Enter') {
 			if (firstNumber !== null && operator && out) {
+				setTakeGreenText(true)
 				const secondNumber = parseFloat(out);
-				const result = operator === '+' ? firstNumber + secondNumber : firstNumber - secondNumber;
+				const result =
+					operator === '+'
+						? firstNumber + secondNumber
+						: firstNumber - secondNumber;
 				setOut(String(result));
 				// Сбросить состояние для новых расчетов
 				setFirstNumber(null);
@@ -49,10 +56,13 @@ export const MyComponent = () => {
 	};
 
 	const handleKeyDown = (e) => {
-		if ((e.key >= '0' && e.key <= '9')) {
+		if (e.key >= '0' && e.key <= '9') {
 			takeNumber(e.key);
 		} else if (e.key === '+' || e.key === '-' || e.key === 'Enter') {
 			handleOperation(e.key);
+		} else if (e.key === 'Backspace') {
+			out.length > 1 ? setOut(out.slice(0, -1)) : setOut('0')
+			setTakeGreenText(false)
 		}
 	};
 
@@ -75,7 +85,7 @@ export const MyComponent = () => {
 	return (
 		<>
 			<input
-				className={styles.input}
+				className={styles.input + ' ' + (takeGreenText ? styles.green : styles.black)}
 				onChange={handleChange}
 				value={out}
 				onKeyDown={handleKeyDown}
@@ -88,6 +98,7 @@ export const MyComponent = () => {
 							if (['+', '-', '=', 'C'].includes(item.val)) {
 								handleOperation(item.val);
 							} else {
+								setTakeGreenText(false)
 								takeNumber(item.val);
 							}
 						}}

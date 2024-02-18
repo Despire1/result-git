@@ -24,6 +24,17 @@
 	color: white;
 }
 
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+input {
+	margin-bottom: 20px;
+	width: 200px;
+}
+
 .App-link {
 	color: #61dafb;
 }
@@ -36,4 +47,9 @@
 	to {
 		transform: rotate(360deg);
 	}
+}
+
+.ErrorText {
+	color: red;
+	font-size: 20px;
 }

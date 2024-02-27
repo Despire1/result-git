@@ -1,179 +1,129 @@
+import { useEffect, useState } from 'react';
 import './App.css';
-import { useState } from 'react';
-import { useRef } from 'react';
+import { Routes, Route, NavLink, Outlet, useParams, useNavigate, Navigate } from 'react-router-dom';
 
-let validateData = {
-	login: '',
-	password: '',
-}
+const database = {
+	productList: [
+		{ id: 1, name: 'Audi' },
+		{ id: 2, name: 'BMW' },
+		{ id: 3, name: 'Mercedes' },
+	],
+	products: {
+		1: { id: 1, name: 'Audi', price: 3600, amount: 21 },
+		2: { id: 2, name: 'BMW', price: 4600, amount: 13 },
+		3: { id: 3, name: 'Mercedes', price: 7600, amount: 20 },
+	},
+};
 
-function App() {
-	const [login, setLogin] = useState('')
-	const [loginError, setLoginError] = useState(null)
-	const [password, setPassword] = useState('')
-	const [passwordError, setPasswordError] = useState(null)
-	const [doublePassword, setDoublePassword] = useState('')
-	const [doublePasswordError, setDouoblePasswordError] = useState(null)
-	const submitButtonRef = useRef(null)
+const generateProducts = () => database.productList;
+const fetchProducts = (id) =>
+	new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(database.products[id]);
+		}, 2000);
+	});
 
-	const onLoginChange = ({ target }) => {
-		setLogin(target.value)
+const MainPage = () => <div>Контент главной страницы</div>;
+const Catalog = () => (
+	<div>
+		<h3>Контент страницы каталога</h3>
+		<ul>
+			{generateProducts().map(({ id, name }) => (
+				<li key={id}>
+					<ExtendedLink to={`product/${id}`}>{name}</ExtendedLink>
+				</li>
+			))}
+		</ul>
+		<Outlet />
+	</div>
+);
+const Contacts = () => <div>Контент страницы "О нас"</div>;
+const NotFound = () => <div>Такой страницы не существует</div>;
+const ProductNotFound = () => <div>Такой страницы не существует</div>;
+const ProductLoadError = () => <div>Произошла ошибка при загрузке данных</div>;
+const Product = () => {
+	const params = useParams();
+	const navigate = useNavigate();
 
-		let error = null;
+	const [product, setProduct] = useState(null);
 
-		if (!/^[\w_]*$/.test(target.value)) {
-			error = "Неверный логин. Допустимые символы - буквы, цифры и нижнее подчеркивание"
+	useEffect(() => {
+		let isLoadingTimeout = false;
 
-		} else if (target.value.length > 20) {
-			error = "Неверный логин. Допустимо не более 20 символов"
+		setTimeout(() => {
+			isLoadingTimeout = true;
 
-		}
+			navigate('/product-load-error');
+		}, 5000);
 
-		if (target.value.length === 20 && password.length === 18 && password === doublePassword) {
-			submitButtonRef.current.focus()
-		}
+		fetchProducts(params.id).then((loadedData) => {
+			if (!isLoadingTimeout) {
+				setProduct(loadedData);
+			}
+		});
+	}, []);
 
-		setLoginError(error)
+	if (!product) {
+		return <ProductNotFound />;
 	}
 
-	const onLoginBlur = ({ target }) => {
-		let error = null;
-
-		if (target.value.length < 3) {
-			error = "Неверный логин. Допустимо не менее 3 символов"
-		}
-
-		setLoginError(error)
-
-	}
-
-	const onPasswordChange = ({ target }) => {
-		setPassword(target.value)
-
-		let error = null;
-
-		if (target.value.length > 18) {
-			error = "Недопустимый пароль. Введите не более 18 символов"
-		}
-
-		if (target.value.length === 18 && login.length === 20 && target.value === doublePassword) {
-			submitButtonRef.current.focus()
-		}
-
-		setPasswordError(error)
-	}
-
-	const onPasswordBlur = ({ target }) => {
-
-		let error = null;
-
-		if (!/^(?=.*[A-Z])[\w_]+$/.test(target.value)) {
-			error = "Недопустимый пароль. Пароль должен содержать хотя бы одну заглавную букву. Допустимы буквы, цифры и нижнее подчеркивание"
-
-		}
-
-		setPasswordError(error)
-
-	}
-
-	const onDoublePasswordChange = ({ target }) => {
-		setDoublePassword(target.value)
-		if (password.length === 18 && login.length === 20 && target.value === password) {
-			submitButtonRef.current.focus()
-		}
-	}
-
-	const onDoublePasswordBlur = ({ target }) => {
-		setDoublePassword(target.value)
-		let error = null;
-
-
-		if (target.value !== password) {
-			error = 'Пароли не совпадают'
-		}
-
-		setDouoblePasswordError(error)
-	}
-
-	const onSubmit = (e) => {
-		e.preventDefault()
-		validateData = {...validateData, login: login, password: password }
-		console.log(validateData)
-	}
+	const { name, price, amount } = product;
 
 	return (
-		<div className='App'>
-			<header className='App-header'>
-				<form onSubmit={onSubmit}>
-					{loginError && <div className='ErrorText'>{loginError}</div>}
-					<input name='login' type='text' value={login} placeholder='Логин' onChange={onLoginChange} onBlur={onLoginBlur}/>
-					{passwordError && <div className='ErrorText'>{passwordError}</div>}
-					<input name='password' type='password' value={password} placeholder='Пароль' onChange={onPasswordChange} onBlur={onPasswordBlur}/>
-					{doublePasswordError && <div className='ErrorText'>{doublePasswordError}</div>}
-					<input name='doublePassword' type='password' placeholder='Повторите пароль' value={doublePassword} onChange={onDoublePasswordChange} onBlur={onDoublePasswordBlur}/>
-					<button ref={submitButtonRef} type='submit' disabled={loginError !== null || passwordError !== null || doublePasswordError !== null}>Зарегистрироваться</button>
-				</form>
+		<>
+			<h3>Товар - {name}</h3>
+			<p>Цена - {price}</p>
+			<p>Количество - {amount}</p>
+		</>
+	);
+};
+
+const ExtendedLink = ({ to, children }) => (
+	<NavLink to={to}>
+		{({ isActive }) =>
+			isActive ? (
+				<>
+					<span>{children}</span>
+					<span>*</span>
+				</>
+			) : (
+				<div>{children}</div>
+			)
+		}
+	</NavLink>
+);
+
+function App() {
+	return (
+		<div className="App">
+			<header className="App-header">
+				<div>
+					<h3>Меню</h3>
+					<ul>
+						<li>
+							<ExtendedLink to="/">Главная</ExtendedLink>
+						</li>
+						<li>
+							<ExtendedLink to="/catalog">Каталог</ExtendedLink>
+						</li>
+						<li>
+							<ExtendedLink to="/about">О нас</ExtendedLink>
+						</li>
+					</ul>
+				</div>
+				<Routes>
+					<Route path="/" element={<MainPage />} />
+					<Route path="/catalog" element={<Catalog />}>
+						<Route path="product/:id" element={<Product />} />
+					</Route>
+					<Route path="/product-load-error" element={<ProductLoadError />} />
+					<Route path="/404" element={<NotFound />} />
+					<Route path="/about" element={<Contacts />} />
+					<Route path="*" element={<Navigate to="/404" />} />
+				</Routes>
 			</header>
 		</div>
-	)
-
+	);
 }
 
 export default App;
-
-
-// const [login, setLogin] = useState('');
-// 	const [loginError, setLoginError] = useState(null);
-// 	const submitButtonRef = useRef(null)
-
-// 	const onInputChange = ({ target }) => {
-// 		setLogin(target.value);
-
-// 		let error = null;
-
-// 		if (!/^[\w_]*$/.test(target.value)) {
-// 			error =
-// 				'Неверный логин. Допустимые символы - буквы, цифры и нижнее подчеркивание';
-// 		} else if (target.value.length > 20) {
-// 			error = 'Неверный логин. Допустимыо не более 20 символов';
-// 		}
-
-// 		if (target.value.length === 20) {
-// 			submitButtonRef.current.focus()
-// 		}
-
-// 		setLoginError(error);
-// 	};
-
-// 	const onSubmit = (event) => {
-// 		event.preventDefault()
-// 		console.log(login)
-// 	};
-
-// 	const onBlur = ({ target }) => {
-// 		if (target.value.length < 3) {
-// 			setLoginError("Неверный логин. Допускается не меньше 3 символом")
-// 		}
-
-// 	}
-
-// 	return (
-// 		<div className="App">
-// 			<header className="App-header">
-// 				<form onSubmit={onSubmit}>
-// 					{loginError && <div className='ErrorText'>{loginError}</div>}
-// 					<input
-// 						type="text"
-// 						name="login"
-// 						value={login}
-// 						placeholder='Логин'
-// 						onChange={onInputChange}
-// 						onBlur={onBlur}
-// 					/>
-// 					<button ref={submitButtonRef} type="submit" disabled={loginError !== null}>
-// 						Отправить
-// 					</button>
-// 				</form>
-// 			</header>
-// 		</div>
-// 	);

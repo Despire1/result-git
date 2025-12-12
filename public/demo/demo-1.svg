@@ -1,0 +1,16 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TeacherBot demo 1 placeholder">
+  <defs>
+    <linearGradient id="grad-1" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#141824" />
+      <stop offset="100%" stop-color="#22324f" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" rx="24" fill="url(#grad-1)" />
+  <rect x="32" y="32" width="736" height="536" rx="20" fill="#0f131e" opacity="0.75" />
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#c7d2fe" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="72" font-weight="700" letter-spacing="1">
+    Demo 1
+  </text>
+  <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" fill="#9ca3af" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="20">
+    Placeholder mockup preview
+  </text>
+</svg>

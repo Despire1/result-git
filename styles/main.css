@@ -225,6 +225,8 @@ header.scrolled {
   filter: blur(80px);
   z-index: -1;
   animation: float 18s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
 }
 
 .hero::after {
@@ -239,10 +241,10 @@ header.scrolled {
 
 @keyframes float {
   from {
-    transform: translateY(-6px) scale(1.02);
+    transform: translate3d(0, -6px, 0) scale(1.02);
   }
   to {
-    transform: translateY(6px) scale(1);
+    transform: translate3d(0, 6px, 0) scale(1);
   }
 }
 
@@ -362,6 +364,8 @@ header.scrolled {
   font-size: 13px;
   backdrop-filter: blur(4px);
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.32);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 .badge-a {
@@ -443,6 +447,7 @@ header.scrolled {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
 }
 
 .reveal-visible {

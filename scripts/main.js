@@ -91,9 +91,9 @@ const setupBadges = () => {
   badges.forEach((badge, index) => {
     badge.animate(
       [
-        { transform: 'translateY(0px)' },
-        { transform: 'translateY(6px)' },
-        { transform: 'translateY(0px)' },
+        { transform: 'translate3d(0, 0px, 0)' },
+        { transform: 'translate3d(0, 6px, 0)' },
+        { transform: 'translate3d(0, 0px, 0)' },
       ],
       {
         duration: 4500 + index * 400,

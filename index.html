@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TeacherBot — оплаты и напоминания в Telegram</title>
+    <meta
+      name="description"
+      content="TeacherBot — порядок в оплатах и уроках без таблиц. Оплаты, долги, напоминания ученикам и запуск за минуту прямо в Telegram."
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <div id="mobile-drawer">
+      <a href="#how-it-works">Как работает</a>
+      <a href="#features">Возможности</a>
+      <a href="#demos">Примеры</a>
+      <a class="btn btn-primary cta-link" data-payload="lp_header" href="#cta">В Telegram →</a>
+    </div>
+    <header>
+      <div class="container navbar">
+        <div class="logo">
+          <div class="logo-mark">T</div>
+          <span>TeacherBot</span>
+        </div>
+        <nav class="nav-links">
+          <a href="#how-it-works">Как работает</a>
+          <a href="#features">Возможности</a>
+          <a href="#demos">Примеры</a>
+          <a href="#cta">Ранний доступ</a>
+        </nav>
+        <div class="hero-ctas">
+          <a class="btn btn-secondary cta-link" data-payload="lp_header" href="#cta">В Telegram →</a>
+          <button id="nav-toggle" class="menu-toggle" aria-label="Открыть меню">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section hero" id="hero" data-track>
+        <div class="container hero-grid">
+          <div class="hero-copy reveal">
+            <p class="tag">Бесплатно · без спама · можно выйти в любой момент</p>
+            <h1 class="hero-title">TeacherBot — оплаты и напоминания для репетитора в Telegram</h1>
+            <p class="hero-sub">Порядок в оплатах и уроках без таблиц… ранний доступ бесплатно.</p>
+            <ul class="hero-bullets">
+              <li><span class="bullet-dot"></span>Оплаты и долги — всегда под рукой</li>
+              <li><span class="bullet-dot"></span>Напоминания ученикам — без ручной рутины</li>
+              <li><span class="bullet-dot"></span>Запуск за 1 минуту — прямо в Telegram</li>
+            </ul>
+            <div class="hero-ctas">
+              <a class="btn btn-primary cta-link" data-payload="lp_hero" href="#cta">Хочу ранний доступ → в Telegram</a>
+              <a class="btn btn-secondary" href="#demos">Посмотреть примеры</a>
+            </div>
+            <div class="hero-meta">Бесплатно • без спама • можно выйти в любой момент</div>
+          </div>
+          <div class="hero-visual reveal">
+            <div class="screen">
+              <div class="screen-head">
+                <span class="screen-dot"></span>
+                <span class="screen-dot"></span>
+                <span class="screen-dot"></span>
+              </div>
+              <div class="chat-row">
+                <strong>Ученики</strong>
+                <span>Оплата Анна · 3 урока осталось</span>
+              </div>
+              <div class="chat-row">
+                <strong>Напоминание</strong>
+                <span>Сегодня в 18:00 · Zoom, оплата до урока</span>
+              </div>
+              <div class="chat-row">
+                <strong>Долги</strong>
+                <span>Иван · 2 урока, +1 перенос</span>
+              </div>
+            </div>
+            <div class="floating-badge badge-a">Долг закрыт</div>
+            <div class="floating-badge badge-b">Оплата получена</div>
+            <div class="floating-badge badge-c">Напоминание отправлено</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pain" data-track>
+        <div class="container">
+          <h2>Что болит у репетитора</h2>
+          <p class="lead">Собрали шесть главных точек, которые TeacherBot убирает в автомате.</p>
+          <div class="grid cols-3">
+            <div class="card reveal">
+              <h3>Таблицы и заметки</h3>
+              <p>Оплаты, долги, переносы в разных местах. Не нужно — всё в одном Telegram-боте.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Забытые напоминания</h3>
+              <p>Неручные push перед уроком и после — без неловких сообщений “вы про оплату”.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Кэшбэк в голове</h3>
+              <p>Кто сколько должен и когда платил — аккуратная история для каждого ученика.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Переносы</h3>
+              <p>Фиксировать переносы и не теряться в датах. Бот сам напомнит, когда перенос отыграть.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Абонементы</h3>
+              <p>Готовые шаблоны абонементов, чтобы не путаться в количестве уроков и сроках.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Отчёты</h3>
+              <p>Сводка недели/месяца: сколько уроков, оплат и долгов. Без Excel.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="before-after" data-track>
+        <div class="container split two">
+          <div class="card reveal">
+            <h2>До TeacherBot</h2>
+            <p class="lead">Стикеры в чате, таблицы, забытые оплаты и постоянная тревога “все ли оплатили?”.</p>
+            <ul class="hero-bullets">
+              <li><span class="bullet-dot"></span>Напоминания вручную</li>
+              <li><span class="bullet-dot"></span>Путаемся в переносах</li>
+              <li><span class="bullet-dot"></span>Нет истории оплат</li>
+            </ul>
+          </div>
+          <div class="card reveal">
+            <h2>После TeacherBot</h2>
+            <p class="lead">Бот сам ведёт оплаты и долги, отправляет сообщения и даёт сводку по неделе.</p>
+            <ul class="hero-bullets">
+              <li><span class="bullet-dot"></span>Автонастройка за 1 минуту</li>
+              <li><span class="bullet-dot"></span>Оплаты и долги под рукой</li>
+              <li><span class="bullet-dot"></span>Сводка недели/месяца готова</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how-it-works" data-track>
+        <div class="container">
+          <h2>Как работает</h2>
+          <p class="lead">Три шага — и напоминания с оплатами больше не занимают время.</p>
+          <div class="grid cols-3">
+            <div class="card reveal">
+              <div class="badge-num">1</div>
+              <h3>Подключаете Telegram</h3>
+              <p>Жмёте “В Telegram”, выбираете тип занятий и валюту. Без интеграций и разработчиков.</p>
+            </div>
+            <div class="card reveal">
+              <div class="badge-num">2</div>
+              <h3>Добавляете учеников</h3>
+              <p>Импорт контактов или быстрый ввод. Бот сам напомнит про оплату и уроки.</p>
+            </div>
+            <div class="card reveal">
+              <div class="badge-num">3</div>
+              <h3>Получаете отчёты</h3>
+              <p>Сводка по неделе/месяцу, история оплат и долгов. Все напоминания отправлены вовремя.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features" data-track>
+        <div class="container">
+          <h2>Возможности TeacherBot</h2>
+          <p class="lead">Главные функции, которые дают порядок и спокойствие.</p>
+          <div class="grid cols-3">
+            <div class="card reveal">
+              <h3>Учёт оплат</h3>
+              <p>Разовые платежи и абонементы с остатком уроков.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Долги и история</h3>
+              <p>Видно, кто должен, когда платил и сколько уроков осталось.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Напоминания перед уроком</h3>
+              <p>Авто-сообщение ученику перед занятием с ссылкой и оплатой.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Напоминания про оплату</h3>
+              <p>Деликатные шаблоны сообщений без неловкости.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Перенос занятия</h3>
+              <p>Фиксируем перенос, ставим новую дату, напоминаем автоматически.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Сводка недели/месяца</h3>
+              <p>Доход, долги, количество уроков и перенесённых занятий.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="bonus" data-track>
+        <div class="container split two">
+          <div class="reveal">
+            <h2>Бонус первым участникам</h2>
+            <p class="lead">Получите готовые материалы и ранний доступ бесплатно.</p>
+            <ul class="hero-bullets">
+              <li><span class="bullet-dot"></span>12 готовых сообщений: напомнить про оплату без неловкости</li>
+              <li><span class="bullet-dot"></span>Чек-лист: система оплат репетитора за 10 минут</li>
+              <li><span class="bullet-dot"></span>Шаблон абонементов: чтобы не путаться</li>
+            </ul>
+            <a class="btn btn-primary cta-link" data-payload="lp_bonus" href="#cta">Получить бонус и ранний доступ →</a>
+          </div>
+          <div class="bonus-preview card reveal">
+            <h3>Что внутри</h3>
+            <p class="lead">Мини-гайд, текстовые шаблоны и мини-таблица абонементов. Всё упаковано в Telegram.</p>
+            <div class="tag">PDF + Telegram</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="demos" data-track>
+        <div class="container">
+          <div class="split two">
+            <div class="reveal">
+              <h2>Примеры TeacherBot</h2>
+              <p class="lead">8–10 мокапов: так выглядят оповещения, отчёты и карточки учеников.</p>
+            </div>
+            <div class="hero-ctas reveal" style="justify-content: flex-end">
+              <a class="btn btn-secondary cta-link" data-payload="lp_demo" href="#cta">В Telegram за примером</a>
+            </div>
+          </div>
+          <div class="demo-grid"></div>
+        </div>
+      </section>
+
+      <section class="section" id="faq" data-track>
+        <div class="container">
+          <h2>FAQ</h2>
+          <div class="faq-grid">
+            <div class="faq-item reveal">
+              <button aria-expanded="false">Сколько стоит?<span>+</span></button>
+              <div class="faq-content"><p>На этапе раннего доступа — бесплатно. Дальше — честная помесячная подписка.</p></div>
+            </div>
+            <div class="faq-item reveal">
+              <button aria-expanded="false">Можно ли выйти из бота?<span>+</span></button>
+              <div class="faq-content"><p>Да, одним нажатием. Бот не спамит и не навязывает.</p></div>
+            </div>
+            <div class="faq-item reveal">
+              <button aria-expanded="false">Это заменяет таблицы?<span>+</span></button>
+              <div class="faq-content"><p>Да. Оплаты, долги, переносы и сводки — прямо в Telegram.</p></div>
+            </div>
+            <div class="faq-item reveal">
+              <button aria-expanded="false">Что насчёт абонементов?<span>+</span></button>
+              <div class="faq-content"><p>Готовые шаблоны абонементов с подсчётом оставшихся уроков.</p></div>
+            </div>
+            <div class="faq-item reveal">
+              <button aria-expanded="false">Как приходят напоминания?<span>+</span></button>
+              <div class="faq-content"><p>Ученикам в Telegram за день и за час до урока, отдельные — про оплату.</p></div>
+            </div>
+            <div class="faq-item reveal">
+              <button aria-expanded="false">Нужны интеграции?<span>+</span></button>
+              <div class="faq-content"><p>Нет. Всё работает в Telegram, подключение за минуту.</p></div>
+            </div>
+            <div class="faq-item reveal">
+              <button aria-expanded="false">Есть поддержка?<span>+</span></button>
+              <div class="faq-content"><p>Да. Отвечаем в течение дня прямо в боте.</p></div>
+            </div>
+            <div class="faq-item reveal">
+              <button aria-expanded="false">Что с безопасностью?<span>+</span></button>
+              <div class="faq-content"><p>Данные шифруются, доступ только у вас. Можно удалить их в любой момент.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="cta" data-track>
+        <div class="container split two">
+          <div class="reveal">
+            <h2>Запускаем TeacherBot в вашем Telegram</h2>
+            <p class="lead">Ранний доступ бесплатно. Без спама. Можно выйти в любой момент.</p>
+          </div>
+          <div class="hero-ctas reveal" style="justify-content: flex-end">
+            <a class="btn btn-primary cta-link" data-payload="lp_footer" href="#">В Telegram →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container split two">
+        <div>TeacherBot · 2025</div>
+        <div class="footer-links">
+          <a href="#">Поддержка</a>
+          <a href="#">Политика</a>
+          <a href="#">Оферта</a>
+        </div>
+      </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+      <div>
+        <img src="" alt="Demo" />
+        <div class="lightbox-caption"></div>
+      </div>
+    </div>
+
+    <script type="module" src="scripts/main.js"></script>
+  </body>
+</html>

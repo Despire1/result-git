@@ -310,6 +310,7 @@ header.scrolled {
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   overflow: hidden;
+  order: -1;
 }
 
 .screen {
@@ -390,6 +391,10 @@ header.scrolled {
   .hero-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: center;
+  }
+
+  .hero-visual {
+    order: initial;
   }
 }
 
@@ -565,14 +570,16 @@ header.scrolled {
 }
 
 .faq-content {
-  max-height: 0;
+  height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease;
+  transition: height 0.28s ease, opacity 0.28s ease;
   padding: 0 16px;
+  opacity: 0;
+  will-change: height, opacity;
 }
 
-.faq-item button[aria-expanded='true'] + .faq-content {
-  max-height: 200px;
+.faq-content.open {
+  opacity: 1;
   padding-bottom: 16px;
 }
 

@@ -41,13 +41,62 @@ const setupReveal = () => {
 };
 
 const setupAccordion = () => {
-  document.querySelectorAll('.faq-item button').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      document.querySelectorAll('.faq-item button').forEach((other) => {
-        if (other !== btn) other.setAttribute('aria-expanded', 'false');
+  const items = document.querySelectorAll('.faq-item');
+
+  const collapse = (item) => {
+    const button = item.querySelector('button');
+    const content = item.querySelector('.faq-content');
+    if (!content) return;
+
+    const contentHeight = content.scrollHeight;
+    content.style.height = `${contentHeight}px`;
+    requestAnimationFrame(() => {
+      content.style.height = '0px';
+      content.classList.remove('open');
+      button.setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  const expand = (item) => {
+    const button = item.querySelector('button');
+    const content = item.querySelector('.faq-content');
+    if (!content) return;
+
+    const contentHeight = content.scrollHeight;
+    content.style.height = `${contentHeight}px`;
+    content.classList.add('open');
+    button.setAttribute('aria-expanded', 'true');
+
+    const onTransitionEnd = (event) => {
+      if (event.propertyName === 'height' && button.getAttribute('aria-expanded') === 'true') {
+        content.style.height = 'auto';
+      }
+    };
+
+    content.addEventListener('transitionend', onTransitionEnd, { once: true });
+  };
+
+  items.forEach((item) => {
+    const button = item.querySelector('button');
+    const content = item.querySelector('.faq-content');
+    if (!button || !content) return;
+
+    // ensure collapsed state on load
+    content.style.height = '0px';
+    button.setAttribute('aria-expanded', 'false');
+
+    button.addEventListener('click', () => {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      items.forEach((otherItem) => {
+        if (otherItem !== item) collapse(otherItem);
       });
-      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+
+      if (isExpanded) {
+        collapse(item);
+      } else {
+        expand(item);
+      }
     });
   });
 };

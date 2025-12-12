@@ -263,7 +263,7 @@ header.scrolled {
 }
 
 .hero-copy {
-  order: 2;
+  order: 1;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -325,7 +325,7 @@ header.scrolled {
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   overflow: hidden;
-  order: 1;
+  order: 2;
 }
 
 .screen {

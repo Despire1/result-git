@@ -1,0 +1,17 @@
+{
+  "name": "teacherbot-landing",
+  "version": "1.0.0",
+  "description": "Static responsive landing page for TeacherBot with Telegram deeplinks.",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 4173"
+  },
+  "keywords": [
+    "teacherbot",
+    "landing",
+    "telegram"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs"
+}
